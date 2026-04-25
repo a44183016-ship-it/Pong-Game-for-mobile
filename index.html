@@ -3,35 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Pong Game</title>
+    <title>Pong Game - Multiplayer</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Pong Game</h1>
-        <div class="scoreboard">
-            <div class="score">
-                <span>Player</span>
-                <p id="playerScore">0</p>
-            </div>
-            <div class="score">
-                <span>Computer</span>
-                <p id="computerScore">0</p>
+        <!-- Main Menu Screen -->
+        <div id="menuScreen" class="screen active">
+            <h1>Pong Game</h1>
+            <p class="subtitle">Select Game Mode</p>
+            <div class="menu-buttons">
+                <button class="menu-btn" onclick="startGameMode('single')">Single Player (vs AI)</button>
+                <button class="menu-btn" onclick="startGameMode('local')">Local Multiplayer (2 Players)</button>
             </div>
         </div>
-        <div class="canvas-container">
-            <canvas id="pongCanvas"></canvas>
+
+        <!-- Difficulty Selection Screen -->
+        <div id="difficultyScreen" class="screen">
+            <h1>Select Difficulty</h1>
+            <div class="difficulty-buttons">
+                <button class="difficulty-btn" onclick="startWithDifficulty('easy')">🟢 Easy</button>
+                <button class="difficulty-btn" onclick="startWithDifficulty('normal')">🟡 Normal</button>
+                <button class="difficulty-btn" onclick="startWithDifficulty('hard')">🔴 Hard</button>
+            </div>
+            <button class="back-btn" onclick="backToMenu()">← Back</button>
         </div>
-        <div class="controls">
-            <p id="controlsText">Use mouse or arrow keys to move</p>
-            <button id="startBtn">Start Game</button>
-            <button id="resetBtn">Reset Game</button>
-            <div class="mobile-buttons" id="mobileControls">
-                <button id="upBtn" class="mobile-btn">↑ UP</button>
-                <button id="downBtn" class="mobile-btn">↓ DOWN</button>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="screen">
+            <div class="game-header">
+                <h1 id="gameTitle">Pong Game</h1>
+                <span id="difficultyDisplay" class="difficulty-badge"></span>
+            </div>
+            
+            <div class="scoreboard">
+                <div class="score">
+                    <span id="player1Label">Player 1</span>
+                    <p id="player1Score">0</p>
+                </div>
+                <div class="score center-info">
+                    <span id="gameStatus">Ready</span>
+                </div>
+                <div class="score">
+                    <span id="player2Label">Player 2</span>
+                    <p id="player2Score">0</p>
+                </div>
+            </div>
+            
+            <div class="canvas-container">
+                <canvas id="pongCanvas"></canvas>
+                <div id="pauseOverlay" class="pause-overlay" style="display:none;">
+                    <div class="pause-content">
+                        <h2>PAUSED</h2>
+                        <p>Press P to resume</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <p id="controlsText">Use mouse or arrow keys to move</p>
+                <div class="button-group">
+                    <button id="startBtn" class="control-btn">Start Game</button>
+                    <button id="pauseBtn" class="control-btn">Pause</button>
+                    <button id="resetBtn" class="control-btn">Reset</button>
+                    <button id="menuBtn" class="control-btn">Menu</button>
+                </div>
+                <div class="mobile-buttons" id="mobileControls">
+                    <div class="player-controls">
+                        <span class="player-label">P1</span>
+                        <button id="upBtn" class="mobile-btn">↑</button>
+                        <button id="downBtn" class="mobile-btn">↓</button>
+                    </div>
+                    <div class="player-controls">
+                        <span class="player-label">P2</span>
+                        <button id="upBtn2" class="mobile-btn">↑</button>
+                        <button id="downBtn2" class="mobile-btn">↓</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
